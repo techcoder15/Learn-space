@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale-1.0">
+
+Solar System VR styling for full-screen experience */
+
+body { margin: 0;
+
+canvas (display: block; }
+
+</style><body>
+
+<!-- Import the Three is Library
+
+scene, camera, and renderer */
+
+const scene now THREE.Scone();
+
+const camега new THREE. PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer new THREE.WebGL Renderer();
+
+Set renderer size */ /
+
+renderer.setSize(window.innerWidth, window.innerHeight); document.body.appendChild(renderer.domElement);
+
+/* Create spheres representing planets */
+
+const geometry new THREE. SphereGeometry (1, 32, 32); // Sphere radius of 1 const material new THREE. MeshBasicMaterial({ color: Oxaaaaaa, wireframe: true });
+
+// Create multiple planets
+
+const planets = [];
+
+for (let i=0; i < 5; i++) { const planet new THREE. Mesh(geometry, material);
+
+planet.position.x= 13; // Space planets along the x-axis
+
+planets.push(planet);
+
+scene.add(planet);
+
+}
+
+/* Add light to the scene */
+
+const light = new THREE.PointLight(0xffffff, 1, 100);
+
+light.position.set(10, 10, 10);
+
+scene.add(light);
+
+/* Enable orbit controls */
+
+const controls = new THREE.OrbitControls (camera, renderer.domElement);
+
+/* Set camera position */
+
+camera.position.z = 5;
+
+/* Animation loop */
+
+function animate() {
+
+requestAnimationFrame(animate); renderer.render (scene, camera); controls.update(); // Update controls
+}
+
+animate(); // Start the animation loop
+
+</script>h
