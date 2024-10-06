@@ -1,0 +1,56 @@
+All planetary solutions for confirmed planets with all columns from the Planetary Systems Table. Output is in comma separated (csv) format.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+ps&format=csv
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select
++*+from+ps&format=csv" -O "confirmed_planets.csv"
+
+Return a single planetary solution for confirmed planets with all columns from the Planetary Systems Composite Parameters Table. Output is in json format.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+pscomppars&format=json
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+pscomppars&format=json" -O "confirmed_planets.json"
+
+Return a list of stars known to host exoplanets. Output is a fixed-column width (IPAC format) and sorted in ascending order.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+hostname+from+ps+order+by+hostname+asc&format=ipac
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+hostname+from+ps+order+by+hostname+asc
+&format=ipac" -O "stars_hosting_exoplanets.tbl"
+
+Find the default planetary solution for all confirmed planets discovered by Kepler. Output is in VOTable format in ascending order of planet name.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+ps+where +default_flag+=+1+and+disc_facility+LIKE
++'Kepler'+order+by+pl_name+asc+&format=votable
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+ps+where
++default_flag+=+1+and+disc_facility+LIKE+'Kepler'+order+by+pl_name+asc+&format=votable" -O "confirmed_kepler_field.xml"
+
+Return all columns for the default solution in the Planetary Systems Table for confirmed planets that transit their host stars. Output is in tab-separated format, sorted alphabetically by the host star name.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+ps+where+tran_flag=1+and+default_flag=1+order+by+pl_name&format=tsv
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+ps+where+tran_flag=1+and+default_flag=1+order
++by+pl_name&format=tsv" -O "planets_transit_host.tbl"
+
+Return a current list of non-confirmed Kepler planet candidates from the KOI Cumulative list. (Utilizes the old API and will soon be replaced with a TAP query.)	
+https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=cumulative&format=ipac&where=koi_disposition
+like 'CANDIDATE'
+wget "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=cumulative&format=ipac
+&where=koi_disposition like 'CANDIDATE'" -O "nonconf_planet_cand.tbl"
+
+Return a list of K2 targets from the K2 Campaign 5. (Utilizes the old API and will soon be replaced with a TAP query.)	
+https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=k2targets&format=ipac&where=k2_campaign=5
+wget "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=k2targets&format=ipac&where
+=k2_campaign=5" -O "k2_targets_c0.tbl"
+
+Return all default parameters for one particular KOI in the KOI Cumulative table. (Utilizes the old API and will soon be replaced with a TAP query.)	
+https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=koi&format=ipac&where=kepoi_name='K00007.01'OR kepoi_name='K00742.01'
+wget "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?&table=koi&format=ipac&where=kepoi_name=
+'K00007.01' OR kepoi_name='K00742.01' -O "koi_OR.tbl"
+
+Return a list of microlensing planets from the Planetary Systems Composite Parameters table where the number of photometric time series in the archive is non-zero.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,st_nphot+from+pscomppars+where+discoverymethod+like+%27%25Micro%25%27+and+st_nphot%3E0&format=tsv
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,st_nphot+from+pscomppars+where+discoverymethod
++like+%27%25Micro%25%27+and+st_nphot%3E0&format=tsv" -O "micro_ts.tbl"
+
+Find Kepler planetary candidates from the KOI Cumulative Table smaller than 2Re with equilibrium temperatures between 180–303K. (Utilizes the old API and will soon be replaced with a TAP query.)	
+https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=cumulative&where=koi_prad<2 and koi_teq>180
+and koi_teq<303 and koi_disposition like 'CANDIDATE'
+wget "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=cumulative&where=koi_prad<2 and
+koi_teq>180 and koi_teq<303 and koi_disposition like 'CANDIDATE'" -O "koi_teff_180-303.tbl"
+
+Return all parameters from Planetary Systems Composite Parameters Table for confirmed planets discovered by TESS. Output is in JSON, formatted and sorted in descending order by orbital period.	
+https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+pscomppars+where+disc_facility+like+%27%25TESS%25%27+order+by+pl_orbper+desc&format=json
+wget "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+*+from+pscomppars+where+disc_facility+like
++%27%25TESS%25%27+order+by+pl_orbper+desc&format=json'" -O "TESS_planes.json"
